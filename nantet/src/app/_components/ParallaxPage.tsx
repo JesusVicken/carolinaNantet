@@ -3,7 +3,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
     CheckCircle2,
-    MessageCircle,
     ArrowRight,
     Activity,
     ShieldCheck,
@@ -11,6 +10,7 @@ import {
 } from "lucide-react";
 
 // --- HOOK DE PARALLAX PERSONALIZADO ---
+// Garante o efeito visual sem depender de bibliotecas externas que podem falhar
 const useParallax = (speed = 0.5) => {
     const ref = useRef<HTMLDivElement>(null);
     const [offset, setOffset] = useState(0);
@@ -19,6 +19,7 @@ const useParallax = (speed = 0.5) => {
         const handleScroll = () => {
             if (!ref.current) return;
             const rect = ref.current.getBoundingClientRect();
+            // Otimização: só calcula se estiver visível na tela
             if (rect.top < window.innerHeight && rect.bottom > 0) {
                 const scrollY = window.scrollY;
                 const elementTop = rect.top + scrollY;
@@ -35,7 +36,8 @@ const useParallax = (speed = 0.5) => {
     return { ref, offset };
 };
 
-// --- COMPONENTE DO BOTÃO NOVO (EFEITO SMARTPOP) ---
+// --- COMPONENTE DO BOTÃO (EFEITO SMARTPOP) ---
+// Botão que expande/recolhe ao passar o mouse
 const WhatsAppCTA = () => (
     <div className="flex flex-col items-center justify-center w-full py-12">
         <a
@@ -49,12 +51,12 @@ const WhatsAppCTA = () => (
                 hover:w-14 hover:min-w-[3.5rem]
             "
         >
-            {/* Texto que some ao fechar */}
+            {/* Texto que desaparece ao passar o mouse */}
             <div className="absolute flex items-center justify-center gap-2 whitespace-nowrap transition-all duration-300 group-hover:opacity-0 group-hover:translate-x-10">
                 <span className="text-lg font-bold tracking-wide">Entrar em contato</span>
             </div>
 
-            {/* Seta que aparece ao fechar */}
+            {/* Ícone de seta que aparece ao passar o mouse */}
             <div className="absolute flex items-center justify-center opacity-0 transition-all duration-500 delay-100 group-hover:opacity-100 group-hover:scale-100 scale-50">
                 <ArrowRight size={24} strokeWidth={3} />
             </div>
@@ -62,7 +64,7 @@ const WhatsAppCTA = () => (
     </div>
 );
 
-// --- DADOS DAS SEÇÕES ---
+// --- DADOS DAS SEÇÕES (COM OS TEXTOS RESTAURADOS) ---
 interface ParallaxSectionData {
     id: number;
     videoSrc: string;
@@ -82,11 +84,13 @@ const sectionsData: ParallaxSectionData[] = [
         subtitle: "Fisioterapia & Pilates",
         overlayGradient: "linear-gradient(to bottom, rgba(39, 174, 96, 0.4) 0%, rgba(44, 62, 80, 0.9) 100%)",
         contentTitle: "Excelência em Movimento",
+        // Texto restaurado
         contentBody: (
             <div className="space-y-6 text-center max-w-3xl mx-auto">
                 <p className="text-lg text-slate-600 leading-relaxed">
                     Nossa metodologia une o melhor da fisioterapia clássica com a fluidez do Pilates moderno,
-                    proporcionando reabilitação eficaz e fortalecimento consciente. Tratamos cada paciente como único.
+                    proporcionando reabilitação eficaz e fortalecimento consciente. Tratamos cada paciente como único,
+                    respeitando seus limites e potencializando seus resultados.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 text-left">
                     {['Avaliação Individualizada', 'Equipamentos de Ponta', 'Ambiente Acolhedor', 'Foco em Resultados'].map((item, i) => (
@@ -105,6 +109,7 @@ const sectionsData: ParallaxSectionData[] = [
         title: "Pilates Terapêutico",
         overlayGradient: "linear-gradient(to bottom, rgba(52, 152, 219, 0.4) 0%, rgba(44, 62, 80, 0.9) 100%)",
         contentTitle: "Corpo Forte, Mente Equilibrada",
+        // Texto restaurado
         contentBody: (
             <div className="space-y-6 text-center max-w-3xl mx-auto">
                 <p className="text-lg text-slate-600 leading-relaxed">
@@ -134,6 +139,7 @@ const sectionsData: ParallaxSectionData[] = [
         title: "Fisioterapia Preventiva",
         overlayGradient: "linear-gradient(to bottom, rgba(155, 89, 182, 0.4) 0%, rgba(44, 62, 80, 0.9) 100%)",
         contentTitle: "Longevidade Ativa",
+        // Texto restaurado
         contentBody: (
             <div className="space-y-6 text-center max-w-3xl mx-auto">
                 <p className="text-lg text-slate-600 leading-relaxed">
@@ -164,6 +170,7 @@ const sectionsData: ParallaxSectionData[] = [
         overlayGradient: "linear-gradient(to bottom, rgba(192, 57, 43, 0.5) 0%, rgba(44, 62, 80, 0.95) 100%)",
         badge: "Especialista em Dor",
         contentTitle: "Tratamento de Dor Crônica",
+        // Texto restaurado
         contentBody: (
             <div className="space-y-6 text-center max-w-3xl mx-auto">
                 <p className="text-lg text-slate-600 leading-relaxed">
@@ -193,7 +200,7 @@ const sectionsData: ParallaxSectionData[] = [
         title: "Inicie Sua Transformação",
         overlayGradient: "linear-gradient(to bottom, rgba(230, 126, 34, 0.4) 0%, rgba(44, 62, 80, 0.9) 100%)",
         contentTitle: "Vamos Começar?",
-        contentBody: <WhatsAppCTA />,
+        contentBody: <WhatsAppCTA />, // Botão SmartPop
     },
 ];
 
@@ -262,6 +269,7 @@ const ParallaxSlide = ({
 };
 
 const ContentSection = ({ title, children }: { title: string; children: React.ReactNode }) => {
+    // Se não houver conteúdo, não renderiza a seção (evita faixas brancas vazias)
     if (!children) return null;
 
     return (
