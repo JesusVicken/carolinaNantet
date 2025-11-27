@@ -41,7 +41,7 @@ const useParallax = (speed = 0.5) => {
 const WhatsAppCTA = () => (
     <div className="flex flex-col items-center justify-center w-full py-12">
         <a
-            href="https://wa.me/5511999999999?text=Olá,%20gostaria%20de%20agendar%20uma%20avaliação!"
+            href="https://wa.me/5561996780739?text=Olá,%20gostaria%20de%20agendar%20uma%20avaliação!"
             target="_blank"
             rel="noopener noreferrer"
             className="
