@@ -3,21 +3,21 @@
 import { WhatsappLogo } from '@phosphor-icons/react/dist/ssr'
 import { Check } from "lucide-react"
 import Carolina from "../../../public/nantet.hero.jpg"
-import CarolinaDesktop from "../../../public/nantet.hero.desktop.jpg" 
 import Image from "next/image"
 
 export function Hero() {
   const whatsappMessage = encodeURIComponent(
-    "Olá Carolina! Vi seu site e gostaria de mais informações sobre as aulas de Pilates e treinos personalizados."
+    "Olá Carolina! Vi seu site e gostaria de mais informações sobre os treinamentos personalizados e reabilitação funcional."
   )
 
   return (
     <section className="bg-[#060505] text-white relative overflow-hidden">
-      {/* Imagem de fundo para mobile */}
+
+      {/* Imagem de fundo mobile */}
       <div>
         <Image
           src={Carolina}
-          alt='Carolina Nantet em aula de Pilates'
+          alt='Carolina Nantet - Fisioterapeuta especialista em reabilitação funcional'
           fill
           sizes='100vw'
           priority
@@ -30,108 +30,114 @@ export function Hero() {
       <div className='container mx-auto pt-16 pb-16 px-4 relative'>
         <article className='grid grid-cols-1 lg:grid-cols-2 gap-12'>
 
-          {/* Bloco de texto */}
+          {/* Texto */}
           <div className='space-y-6' data-aos="fade-up">
             <h1 className="text-3xl md:text-4xl font-bold leading-10">
-              Pilates e Treinamento com <br className="hidden md:block" />Carolina Nantet
+              Treinamento com <br className="hidden md:block" />
+              <span className="text-green-400">Carolina Nantet</span>
             </h1>
 
             <p className="text-lg text-gray-300">
-              Fisioterapeuta especialista em dor crônica, performance atlética e condicionamento físico.
+              Fisioterapeuta especialista em reabilitação funcional,
+              dor crônica e condicionamento físico.
             </p>
 
             {/* Benefícios e indicações */}
             <div className="grid md:grid-cols-2 gap-6">
-              {/* Benefícios do Pilates */}
+
               <div>
-                <p className="text-base md:text-lg font-semibold mb-2">
-                  Benefícios do Pilates:
+                <p className="text-base md:text-lg font-semibold mb-2 text-green-400">
+                  Benefícios do treinamento:
                 </p>
                 <ul className="text-sm md:text-base space-y-2">
-                  <li className="flex items-center gap-2">
-                    <Check className="text-green-500" />
-                    Redução de dores crônicas
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <Check className="text-green-500" />
-                    Melhora da postura e consciência corporal
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <Check className="text-green-500" />
-                    Força e estabilidade do core
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <Check className="text-green-500" />
-                    Flexibilidade e mobilidade
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <Check className="text-green-500" />
-                    Recuperação e prevenção de lesões
-                  </li>
+                  {[
+                    "Mais tempo de qualidade com a sua família sem dor",
+                    "Melhora da postura e consciência corporal",
+                    "Autonomia e Liberdade para se movimentar",
+                    "Restauração do sono",
+                    "Flexibilidade e mobilidade",
+                    "Recuperação e prevenção de lesões",
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <Check className="text-green-500 mt-1 flex-shrink-0" />
+                      <span className="text-gray-300">{item}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
 
-              {/* Indicado para quem busca */}
               <div>
-                <p className="text-base md:text-lg font-semibold mb-2">
+                <p className="text-base md:text-lg font-semibold mb-2 text-green-400">
                   Indicado para quem busca:
                 </p>
                 <ul className="text-sm md:text-base space-y-2">
-                  <li className="flex items-center gap-2">
-                    <Check className="text-green-500" />
-                    Qualidade de vida e bem-estar
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <Check className="text-green-500" />
-                    Melhor performance esportiva
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <Check className="text-green-500" />
-                    Condicionamento físico seguro
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <Check className="text-green-500" />
-                    Controle e equilíbrio corporal
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <Check className="text-green-500" />
-                    Alívio de estresse e tensão
-                  </li>
+                  {[
+                    "Qualidade de vida e bem-estar",
+                    "Melhorar performance esportiva",
+                    "Condicionamento físico seguro",
+                    "Controle e equilíbrio corporal",
+                    "Alívio de dores e tensões musculares",
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <Check className="text-green-500 mt-1 flex-shrink-0" />
+                      <span className="text-gray-300">{item}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
 
-            {/* Botão WhatsApp */}
+            {/* WhatsApp */}
             <div className="mt-4">
               <a
                 href={`https://wa.me/556182795960?text=${whatsappMessage}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-green-600 text-white flex items-center justify-center w-fit gap-2 px-5 py-3 rounded-md hover:bg-green-700 transition"
+                className="bg-green-600 text-white flex items-center justify-center w-fit gap-2 px-5 py-3 rounded-md hover:bg-green-700 transition hover:scale-105 duration-300"
               >
                 <WhatsappLogo className='w-5 h-5' />
-                Contato via WhatsApp
+                <span className="font-medium">Entrar em Contato</span>
               </a>
+              <p className="text-sm text-gray-400 mt-3">
+                Transforme sua saúde com treinamento especializado e seguro
+              </p>
             </div>
           </div>
 
-          {/* Imagem lateral para desktop (nova imagem) */}
+          {/* VIDEO DESKTOP COM AOS */}
           <div
-            className="hidden md:block relative w-full h-[400px] rounded-3xl overflow-hidden"
+            className="hidden md:block relative w-full h-[400px] rounded-3xl overflow-hidden group"
             data-aos="zoom-in"
+            data-aos-delay="150"
           >
-            <Image
-              src={CarolinaDesktop} // usa a nova imagem desktop
-              alt="Carolina Nantet - Pilates e Fisioterapia"
-              fill
-              quality={100}
-              className="object-cover hover:scale-110 duration-300 transition-transform"
-              style={{ objectPosition: 'center center' }} // mostra a imagem completa
-              priority
+            {/* Vídeo */}
+            <video
+              src="/nantet3.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="
+                w-full h-full object-cover 
+                scale-105 group-hover:scale-110 
+                transition-all duration-[2500ms] ease-out
+              "
             />
+
+            {/* Overlay sutil */}
+            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-500"></div>
+
+            {/* Badge sobre o vídeo */}
+            <div className="absolute bottom-6 left-6 bg-black/70 backdrop-blur-sm rounded-lg px-4 py-2">
+              <p className="text-sm font-medium text-white">
+                Reabilitação Funcional Personalizada
+              </p>
+            </div>
           </div>
+
         </article>
       </div>
+
     </section>
   )
 }
