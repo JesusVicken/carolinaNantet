@@ -16,10 +16,18 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import sunTech from '../../../public/sun.jpg'
+import parceiro1 from '../../../public/parceiro1.jpeg'
+import parceiro2 from '../../../public/parceiro2.jpeg'
+import parceiro3 from '../../../public/parceiro3.jpeg'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const partners = [{ name: 'Sun Tech', logo: sunTech }]
+const partners = [
+  { name: 'Sun Tech', logo: sunTech },
+  { name: 'Parceiro 1', logo: parceiro1 },
+  { name: 'Parceiro 2', logo: parceiro2 },
+  { name: 'Parceiro 3', logo: parceiro3 }
+]
 
 export function Footer() {
   const whatsappNumber = '556182795960'
@@ -232,8 +240,6 @@ export function Footer() {
           referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
       </div>
-
-
     </section>
   )
 }
