@@ -69,7 +69,7 @@ export default function HeroPilates() {
             {/* Vídeo de background */}
             <Parallax speed={-20} className="absolute inset-0">
                 <video
-                    src="/nantet2.mp4"
+                    src="/nantet4.mp4"
                     autoPlay
                     muted
                     loop
