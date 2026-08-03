@@ -33,12 +33,12 @@ export default function ParallaxSection() {
         }
     }
 
-    // Auto-play no mobile
+    // Auto-play no mobile & Safari
     useEffect(() => {
         if (videoRef.current) {
-            if (isMobile) {
-                videoRef.current.play().catch(e => console.log("Auto-play prevented:", e))
-            }
+            videoRef.current.defaultMuted = true
+            videoRef.current.muted = true
+            videoRef.current.play().catch(e => console.log("Auto-play prevented:", e))
         }
     }, [isMobile])
 
@@ -54,7 +54,11 @@ export default function ParallaxSection() {
                             autoPlay
                             loop
                             muted
+                            defaultMuted
                             playsInline
+                            preload="auto"
+                            controls={false}
+                            disablePictureInPicture
                             className="w-full h-full object-cover"
                         />
                         {/* Overlay gradiente moderno */}

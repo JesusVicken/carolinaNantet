@@ -22,6 +22,15 @@ const phrases = [
 export default function HeroPilates() {
     const [index, setIndex] = useState(0)
     const phraseRef = useRef<HTMLDivElement>(null)
+    const videoRef = useRef<HTMLVideoElement>(null)
+
+    useEffect(() => {
+        if (videoRef.current) {
+            videoRef.current.defaultMuted = true
+            videoRef.current.muted = true
+            videoRef.current.play().catch(() => {})
+        }
+    }, [])
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -69,11 +78,16 @@ export default function HeroPilates() {
             {/* Vídeo de background */}
             <Parallax speed={-20} className="absolute inset-0">
                 <video
+                    ref={videoRef}
                     src="/nantet4.mp4"
                     autoPlay
                     muted
+                    defaultMuted
                     loop
                     playsInline
+                    preload="auto"
+                    controls={false}
+                    disablePictureInPicture
                     className="w-full h-full object-cover pointer-events-none"
                 />
             </Parallax>

@@ -41,7 +41,7 @@ const useParallax = (speed = 0.5) => {
 const WhatsAppCTA = () => (
     <div className="flex flex-col items-center justify-center w-full py-12">
         <a
-            href="https://wa.me/5561996780739?text=Olá,%20gostaria%20de%20agendar%20uma%20avaliação!"
+            href="https://wa.me/556182795960?text=Olá,%20gostaria%20de%20agendar%20uma%20avaliação!"
             target="_blank"
             rel="noopener noreferrer"
             className="
@@ -220,6 +220,15 @@ const ParallaxSlide = ({
     badge?: string;
 }) => {
     const { ref, offset } = useParallax(0.5);
+    const videoRef = useRef<HTMLVideoElement>(null);
+
+    useEffect(() => {
+        if (videoRef.current) {
+            videoRef.current.defaultMuted = true;
+            videoRef.current.muted = true;
+            videoRef.current.play().catch(() => {});
+        }
+    }, [videoSrc]);
 
     return (
         <section ref={ref} className="relative h-screen w-full overflow-hidden bg-black">
@@ -232,10 +241,15 @@ const ParallaxSlide = ({
                 }}
             >
                 <video
+                    ref={videoRef}
                     autoPlay
                     muted
+                    defaultMuted
                     loop
                     playsInline
+                    preload="auto"
+                    controls={false}
+                    disablePictureInPicture
                     className="w-full h-full object-cover"
                 >
                     <source src={videoSrc} type="video/mp4" />

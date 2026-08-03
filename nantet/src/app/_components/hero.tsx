@@ -1,11 +1,22 @@
 'use client'
 
+import { useEffect, useRef } from "react"
 import { WhatsappLogo } from '@phosphor-icons/react/dist/ssr'
 import { Check } from "lucide-react"
 import Carolina from "../../../public/nantet.hero.jpg"
 import Image from "next/image"
 
 export function Hero() {
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.defaultMuted = true
+      videoRef.current.muted = true
+      videoRef.current.play().catch(() => {})
+    }
+  }, [])
+
   const whatsappMessage = encodeURIComponent(
     "Olá Carolina! Vi seu site e gostaria de mais informações sobre os treinamentos personalizados e reabilitação funcional."
   )
@@ -112,11 +123,16 @@ export function Hero() {
           >
             {/* Vídeo */}
             <video
+              ref={videoRef}
               src="/nantet3.mp4"
               autoPlay
               loop
               muted
+              defaultMuted
               playsInline
+              preload="auto"
+              controls={false}
+              disablePictureInPicture
               className="
                 w-full h-full object-cover 
                 scale-105 group-hover:scale-110 
