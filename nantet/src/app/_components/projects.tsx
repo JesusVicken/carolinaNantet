@@ -82,7 +82,6 @@ export default function HeroPilates() {
                     src="/nantet4.mp4"
                     autoPlay
                     muted
-                    defaultMuted
                     loop
                     playsInline
                     preload="auto"

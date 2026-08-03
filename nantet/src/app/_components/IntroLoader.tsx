@@ -140,7 +140,6 @@ export default function IntroLoader() {
         src="/nantet3.mp4"
         autoPlay
         muted
-        defaultMuted
         loop
         playsInline
         preload="auto"

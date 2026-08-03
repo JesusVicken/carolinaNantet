@@ -54,7 +54,6 @@ export default function ParallaxSection() {
                             autoPlay
                             loop
                             muted
-                            defaultMuted
                             playsInline
                             preload="auto"
                             controls={false}
