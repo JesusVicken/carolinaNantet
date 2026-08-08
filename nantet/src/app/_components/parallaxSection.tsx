@@ -35,10 +35,39 @@ export default function ParallaxSection() {
 
     // Auto-play no mobile & Safari
     useEffect(() => {
-        if (videoRef.current) {
-            videoRef.current.defaultMuted = true
-            videoRef.current.muted = true
-            videoRef.current.play().catch(e => console.log("Auto-play prevented:", e))
+        const video = videoRef.current;
+        if (video) {
+            video.setAttribute("muted", "");
+            video.setAttribute("playsinline", "true");
+            video.setAttribute("webkit-playsinline", "true");
+            video.muted = true;
+            video.defaultMuted = true;
+
+            const attemptPlay = () => {
+                video.muted = true;
+                const playPromise = video.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(() => {});
+                }
+            };
+
+            if (video.readyState >= 2) {
+                attemptPlay();
+            } else {
+                video.addEventListener("loadedmetadata", attemptPlay, { once: true });
+                video.addEventListener("canplay", attemptPlay, { once: true });
+            }
+
+            const handleUserTouch = () => {
+                if (video.paused) {
+                    video.muted = true;
+                    video.play().catch(() => {});
+                }
+            };
+
+            window.addEventListener("touchstart", handleUserTouch, { passive: true, once: true });
+            window.addEventListener("scroll", handleUserTouch, { passive: true, once: true });
+            window.addEventListener("click", handleUserTouch, { passive: true, once: true });
         }
     }, [isMobile])
 
